@@ -18,7 +18,7 @@ Tested on the **A33‑SWM0810‑V1.1** board revision.
 | On‑board Wi‑Fi (XR819) | ❌ Not working                                |
 
 ## Full boot directory
-From the Kernel Boot Directory, release download the bootimage.tar.xz
+From the Kernel Boot Directory release, download the bootimage.tar.xz
 
 ## How to set up
 

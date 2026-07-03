@@ -24,6 +24,13 @@
 5. Create the boot file system mkfs.vfat -F 32 /dev/sda1
 6. Create the root file system mkfs.f2fs /dev/sda2
 7. flash the uboot code: dd if=u-boot-sunxi-with-spl.bin of=/dev/sda bs=1024 seek=8
-  - make sure you are not writing to a partition: it cannot be /dev/sda1 it must be /dev/sda. You will not overwrite anything.
+  - make sure you are not writing to a partition: it cannot be /dev/sda1, it must be /dev/sda. You will not overwrite anything.
 8. copy the contents of the tar file from "full boot directory" to /dev/sda1
 9. change the boot.cmd script and get rid of everything after rootfs in the console cmd line, you will add it later.
+10. in that same directory launch the boot_script.sh
+11. download the generic u-boot image from alpine linux, untar it, copy the apk directory to /dev/sda2.
+12. unmount everything and plug the sdcard into the sdcard slot on the board.
+13. on the board find two circular pads labeled "RX" and "TX", solder wires to them. Connect them to a USB to UART device.
+14. Before plugging in the board connect to the USB to UART device via picocom.
+15. Plug in the board, if everything is done correctly, you should start to see prints from u-boot and the Linux kernel booting.
+

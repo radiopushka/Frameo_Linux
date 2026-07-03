@@ -30,7 +30,13 @@
 10. in that same directory launch the boot_script.sh
 11. download the generic u-boot image from alpine linux, untar it, copy the apk directory to /dev/sda2.
 12. unmount everything and plug the sdcard into the sdcard slot on the board.
-13. on the board find two circular pads labeled "RX" and "TX", solder wires to them. Connect them to a USB to UART device.
+13. on the board find two circular pads labeled "RX" and "TX", and solder wires to them. Connect them to a USB to UART device.
 14. Before plugging in the board connect to the USB to UART device via picocom.
 15. Plug in the board, if everything is done correctly, you should start to see prints from u-boot and the Linux kernel booting.
+16. remount the 2nd partition and copy/create the directories that are present in / ignoring those that appear when you run mount
+17. add the rootfs back to the console cmd line, replacing the UUID with the UUID of your second partition.
+18. run the boot_script.sh again
+19. reboot and then finish setting up the system, you will need to add all the boot services for alpine back to their corresponding runlevels and remount the / directory as rw. Then add the entry for the / directory in fstab.
+20. your done!
+    
 

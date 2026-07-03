@@ -18,10 +18,7 @@ Tested on the **A33‑SWM0810‑V1.1** board revision.
 | On‑board Wi‑Fi (XR819) | ❌ Not working                                |
 
 ## Full boot directory
-
-Because GitHub won’t accept files over 25 MB, the complete boot image (kernel, initramfs, DTB, boot script) is stored at:
-
-➡️ **[Download from Yandex Disk](https://disk.yandex.ru/d/UgxIxaLW5-Ncgg)**
+From the Kernel Boot Directory, release download the bootimage.tar.xz
 
 ## How to set up
 

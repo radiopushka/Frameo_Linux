@@ -43,7 +43,10 @@ Create two partitions:
   mkfs.vfat -F 32 /dev/sda1
   mkfs.f2fs /dev/sda2
   ```
-7. flash the uboot code: dd if=u-boot-sunxi-with-spl.bin of=/dev/sda bs=1024 seek=8
+### 2. Flash U‑Boot
+```sh
+dd if=u-boot-sunxi-with-spl.bin of=/dev/sda bs=1024 seek=8
+```
   - make sure you are not writing to a partition: it cannot be /dev/sda1, it must be /dev/sda. You will not overwrite anything.
 8. copy the contents of the tar file from "full boot directory" to /dev/sda1
 9. change the boot.cmd script and get rid of everything after rootfs in the console cmd line, you will add it later.

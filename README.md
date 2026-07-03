@@ -21,6 +21,8 @@
 2. Format the SD card as a DOS layout
 3. Create the boot partition in fdisk -> 300MB type 0c toggled flag a
 4. Create the rootfs partition -> the remaining disk space with default options
-5. Create the boot file system mkfs.vfat -F 32 <partition 1>
-6. Create the root file system mkfs.f2fs <partition 2>
-7. flash the uboot code: 
+5. Create the boot file system mkfs.vfat -F 32 /dev/sda1
+6. Create the root file system mkfs.f2fs /dev/sda2
+7. flash the uboot code: dd if=u-boot-sunxi-with-spl.bin of=/dev/sda bs=1024 seek=8
+  - make sure you are not writing to a partition it cannot be /dev/sda1 it must be /dev/sda. you will not overwrite anything
+8. 

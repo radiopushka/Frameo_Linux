@@ -47,19 +47,46 @@ Create two partitions:
 ```sh
 dd if=u-boot-sunxi-with-spl.bin of=/dev/sda bs=1024 seek=8
 ```
-  - make sure you are not writing to a partition: it cannot be /dev/sda1, it must be /dev/sda. You will not overwrite anything.
-8. copy the contents of the tar file from "full boot directory" to /dev/sda1
-9. change the boot.cmd script and get rid of everything after rootfs in the console cmd line, you will add it later.
-10. in that same directory launch the boot_script.sh
-11. download the generic u-boot image from alpine linux, untar it, copy the apk directory to /dev/sda2.
-12. unmount everything and plug the sdcard into the sdcard slot on the board.
-13. on the board find two circular pads labeled "RX" and "TX", and solder wires to them. Connect them to a USB to UART device.
-14. Before plugging in the board connect to the USB to UART device via picocom.
-15. Plug in the board, if everything is done correctly, you should start to see prints from u-boot and the Linux kernel booting.
-16. remount the 2nd partition and copy/create the directories that are present in / ignoring those that appear when you run mount
-17. add the rootfs back to the console cmd line, replacing the UUID with the UUID of your second partition.
-18. run the boot_script.sh again
-19. reboot and then finish setting up the system, you will need to add all the boot services for alpine back to their corresponding runlevels and remount the / directory as rw. Then add the entry for the / directory in fstab.
-20. your done!
-    
+### 3. Install the boot files
+1. Download the archive from the [Full boot directory](#full-boot-directory) link above.
+2. Mount `/dev/sda1` and copy the entire contents of the archive into it.
+3. Edit the `boot.cmd` script on the boot partition:
+   - Remove everything after `rootfs` in the kernel command line (you’ll add it back later).
+4. Run the `boot_script.sh` script (inside the boot directory) to compile `boot.scr`.
+
+### 4. Add the Alpine Linux root filesystem
+1. Download the **generic Alpine Linux ARMv7 u‑boot image** from [alpinelinux.org](https://alpinelinux.org/downloads/).
+2. Extract it and copy the `apk` directory (from the Alpine image) to `/dev/sda2`.
+   - You’ll end up with a basic Alpine filesystem on the second partition.
+
+### 5. First boot
+1. Unmount everything and insert the SD card into the frame’s slot.
+2. Solder wires to the two circular pads labeled **RX** and **TX** on the board.
+3. Connect them to a USB‑to‑UART adapter (3.3 V).
+4. Open a serial terminal (e.g., `picocom -b 115200 /dev/ttyUSB0`).
+5. Power up the board. You should see U‑Boot and Linux kernel messages.
+
+### 6. Complete the installation
+- Mount the second partition (`/dev/mmcblk0p2`) and create the directories that exist in `/` except those that appear when you run `mount`.
+- Restore the kernel command line to mount the correct root partition:
+  1. Edit `boot.cmd` and replace the rootfs part with `root=UUID=<your‑UUID> rootfstype=f2fs rw`.
+  2. Run `boot_script.sh` again to regenerate `boot.scr`.
+- Reboot.
+
+After the system comes up:
+- Remount the root filesystem as read‑write: `mount -o remount,rw /`
+- Add the root entry to `/etc/fstab`.
+- Restore all essential OpenRC services to their runlevels with `rc-update`.
+- Commit your changes (e.g., `lbu commit` if using diskless mode).
+
+## Done!
+Your Frameo picture frame is now a pocket‑sized Alpine Linux machine. Use the USB 2.0 port for Wi‑Fi, Ethernet, or storage – the internal display, touch, and Wi‑Fi are still works in progress. Contributions and improvements welcome!
+
+## Notes
+- USB‑C does **not** work; use the standard USB 2.0 port.
+- The LCD ribbon cable may cause power cycling – if you want to experiment, disconnect it before booting.
+- Sound is recognised by the kernel but currently silent (driver/DTS routing issue).
+- On‑board Wi‑Fi (XR819) requires further device‑tree and module work.
+
+Enjoy your (unintended) Linux box!
 

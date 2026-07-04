@@ -51,7 +51,7 @@ dd if=u-boot-sunxi-with-spl.bin of=/dev/sda bs=1024 seek=8
 2. Mount `/dev/sda1` and copy the entire contents of the archive into it.
 3. Edit the `boot.cmd` script on the boot partition:
    - Remove everything after `rootfs` in the kernel command line (you’ll add it back later).
-4. Run the `boot_script.sh` script (inside the boot directory) to compile `boot.scr`.
+4. Run the `make_script.sh` script (inside the boot directory) to compile `boot.scr`.
 
 ### 4. Add the Alpine Linux root filesystem
 1. Download the **generic Alpine Linux ARMv7 u‑boot image** from [alpinelinux.org](https://alpinelinux.org/downloads/).
@@ -69,7 +69,7 @@ dd if=u-boot-sunxi-with-spl.bin of=/dev/sda bs=1024 seek=8
 - Mount the second partition (`/dev/mmcblk0p2`) and create the directories that exist in `/` except those that appear when you run `mount`.
 - Restore the kernel command line to mount the correct root partition:
   1. Edit `boot.cmd` and replace the rootfs part with `root=UUID=<your‑UUID> rootfstype=f2fs rw`.
-  2. Run `boot_script.sh` again to regenerate `boot.scr`.
+  2. Run `make_script.sh` again to regenerate `boot.scr`.
 - Reboot.
 
 After the system comes up:

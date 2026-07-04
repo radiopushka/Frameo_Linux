@@ -17,6 +17,8 @@ Tested on the **A33‑SWM0810‑V1.1** board revision.
 | Touch panel (GSL1680)  | ⚠️ Not fully tested                           |
 | On‑board Wi‑Fi (XR819) | ❌ Not working                                |
 
+You can solder a USB hub controller to the USB connector on the board and expand the number of USB slots you have available. Then you can 3d print a case encapsulating everything. 
+
 ## Full boot directory
 From the Kernel Boot Directory release, download the bootimage.tar.xz
 

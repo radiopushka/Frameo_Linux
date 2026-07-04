@@ -1,4 +1,4 @@
-# Frameo_Linux
+# Frameo Linux
 
 Turn a Walmart Frameo digital picture frame (Allwinner A33 SoC) into a functional Alpine Linux mini‑computer.  
 Perfect if you got one for free, as a gift, or if you’ve ever wondered what the real purpose of a picture frame is.

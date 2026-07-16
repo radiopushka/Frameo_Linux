@@ -77,6 +77,12 @@ After the system comes up:
 - Add the root entry to `/etc/fstab`.
 - Restore all essential OpenRC services to their runlevels with `rc-update`.
 - Commit your changes (e.g., `lbu commit` if using diskless mode).
+- Create a script in /etc/local.d/ that enables fast networking. By default, the CPU is set to ondemand, which makes network operations slow; you have to set it to performance.
+- ` sunxi:~/file_browser_quantum$ cat /etc/local.d/cpu_governor.start `
+  `
+#!/bin/sh
+echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+  `
 
 ## Done!
 Your Frameo picture frame is now a pocket‑sized Alpine Linux machine. Use the USB 2.0 port for Wi‑Fi, Ethernet, or storage – the internal display, touch, and Wi‑Fi are still works in progress. Contributions and improvements welcome!

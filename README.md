@@ -75,10 +75,10 @@ dd if=u-boot-sunxi-with-spl.bin of=/dev/sda bs=1024 seek=8
 After the system comes up:
 - Remount the root filesystem as read‑write: `mount -o remount,rw /`
 - Add the root entry to `/etc/fstab`.
-- Restore all essential OpenRC services to their runlevels with `rc-update`.
+- Restore all essential OpenRC services like local.d to their runlevels with `rc-update`.
 - Commit your changes (e.g., `lbu commit` if using diskless mode).
 - Create a script in /etc/local.d/ that enables fast networking. By default, the CPU is set to ondemand, which makes network operations slow; you have to set it to performance.
-- ` sunxi:~/file_browser_quantum$ cat /etc/local.d/cpu_governor.start `
+- ` sunxi:~$ cat /etc/local.d/cpu_governor.start `
   
 ```shell
 #!/bin/sh
